@@ -1,0 +1,52 @@
+<ion-header class="listing-header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Inicio</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <!--<background-image class="image-heading" [src]="listing.banner_image">
+    <ion-row class="heading-row">
+      <ion-col no-padding width-100>
+      </ion-col>
+    </ion-row>
+  </background-image>
+  <ion-list>
+   <ion-item>
+      Item with two buttons...
+      <ion-option-button class = "button-positive">Button 1</ion-option-button>
+      <ion-option-button class = "button-assertive">Button 2</ion-option-button>
+   </ion-item>
+   <ion-item>
+      Item with two buttons...
+      <ion-option-button class = "button-positive">Button 1</ion-option-button>
+      <ion-option-button class = "button-assertive">Button 2</ion-option-button>
+   </ion-item>
+</ion-list>-->
+
+  <ion-card *ngFor="let journey of lstJourneys">
+
+    
+    <ion-card-header> 
+      <h1>Código de viaje: {{journey.JourneyId}}</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+      <p>Fecha: {{journey.JourneyDate}}</p>
+      <p>Estado: {{journey.JourneyState}}</p> 
+      </div>
+      <br>
+      <div align="center">
+      <button ion-button color="secondary" >Aceptar</button>
+      <button ion-button color="danger">Rechazar</button> 
+      </div>
+    </ion-card-content>
+    </ion-card>
+
+
+   
+</ion-content>
+
