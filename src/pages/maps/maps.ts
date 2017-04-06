@@ -50,7 +50,7 @@ export class MapsPage implements OnInit {
   @ViewChild(GoogleMap) _GoogleMap: GoogleMap;
   // Manejo socket
 //  messages: any = [];
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   //username: string;
   zone:any;

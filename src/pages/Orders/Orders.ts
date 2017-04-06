@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 export class OrdersPage {
   section: string;
   order_form: FormGroup;
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   zone:any;
   lstWaste:any=[];

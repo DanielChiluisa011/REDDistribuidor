@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   templateUrl: 'contact-card.html'
 })
 export class DistributorInformation {
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   zone:any;
   Form: FormGroup;

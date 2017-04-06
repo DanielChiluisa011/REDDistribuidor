@@ -20,7 +20,7 @@ import * as $ from 'jquery';
 export class SignupPage {
   signup: FormGroup;
   loading: any;
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080';
   socket:any;
   zone:any;
   lstUsers: any=[];
@@ -43,7 +43,7 @@ export class SignupPage {
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       confirm_password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required)
+      role: new FormControl('')
     });
     // Manejo socket
     this.socket=io.connect(this.socketHost);
@@ -51,6 +51,7 @@ export class SignupPage {
     this.socket.emit('AppDataUsersRequest','ex app');
     this.socket.on('AppSelectUsers',(data)=>{
       this.lstUsers = data;
+      alert('Usuarios devueltos: '+data.length);
     });  
     // Fin Manejo socket
   }
@@ -91,6 +92,7 @@ export class SignupPage {
     }
 
   doSignup(){
+    // alert(this.lstUsers.length);
     var flag=false;
     for(var i=0;i<this.lstUsers.length;i++){
       console.log(this.lstUsers[i].person.PersonCi+" "+this.signup.get('ci').value);

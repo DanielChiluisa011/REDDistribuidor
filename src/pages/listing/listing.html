@@ -27,16 +27,16 @@
    </ion-item>
 </ion-list>-->
 
-  <ion-card *ngFor="let journey of lstJourneys">
+  <ion-card *ngFor="let order of lstOrders">
 
     
     <ion-card-header> 
-      <h1>Código de viaje: {{journey.JourneyId}}</h1>
+      <h1>Código de viaje: {{order.OrderId}}</h1>
     </ion-card-header>
     <ion-card-content>
       <div>
-      <p>Fecha: {{journey.JourneyDate}}</p>
-      <p>Estado: {{journey.JourneyState}}</p> 
+      <p>Fecha: {{order.OrderDate}}</p>
+      <p>Estado: {{order.OrderState}}</p> 
       </div>
       <br>
       <div align="center">

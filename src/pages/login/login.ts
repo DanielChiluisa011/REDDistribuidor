@@ -18,7 +18,7 @@ import { Storage } from '@ionic/storage';
 export class LoginPage {
   // Manejo socket
   @ViewChild(Content) content: Content;
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   zone:any;
   lstUsers: any = [];
@@ -49,20 +49,32 @@ export class LoginPage {
     this.zone= new NgZone({enableLongStackTrace: false});
     this.socket.emit('AppDataUsersRequest','ex app');
     this.socket.on('AppSelectUsers',(data)=>{
+      // console.log(data.length);
       this.lstUsers = data;
     });  
     // Fin Manejo socket
   }
 
   doLogin(){
+    this.socket.emit('AppDataUsersRequest','ex app');
+    this.socket.on('AppSelectUsers',(data)=>{
+      // console.log(data.length);
+      this.lstUsers = data;
+    // });  
+    // console.log('doLogin '+this.lstUsers.length);
     // console.log('numero de usuarios: '+this.lstUsers.length)
     var flag=false;
     for(var i=0;i<this.lstUsers.length;i++){
+      // console.log(this.login.get('email').value+' '+this.lstUsers[i].user.UserEmail)
       if(this.login.get('email').value==this.lstUsers[i].user.UserEmail && this.login.get('password').value==this.lstUsers[i].user.UserPassword){
         flag=true;
         this.storage.set('user', this.lstUsers[i].user);
         this.storage.set('person', this.lstUsers[i].person);
-        console.log('Persona logueada '+this.storage.get('person'))
+        this.socket.emit('RequestDistributorData',this.lstUsers[i].person.PersonCi);
+        this.socket.on('DistributorData',(data)=>{
+            this.storage.set('Distributor', data[0]);
+        });
+        // console.log('Persona logueada '+this.storage.get('person'))
         break;
       }else{
         flag=false;
@@ -80,6 +92,7 @@ export class LoginPage {
           });
       toast.present();
     }
+  });
   }
 
   doFacebookLogin() {

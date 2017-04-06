@@ -37,9 +37,6 @@
       <ion-item>
         <ion-input type="password" placeholder="Confirm password" formControlName="confirm_password" show-hide-input></ion-input>
       </ion-item>
-      <ion-item> 
-      <ion-input type="input" placeholder="Distribuidor"  disabled="{{isDisabled}}" formControlName="role"></ion-input>
-    </ion-item>
     </show-hide-container>
     <button ion-button block class="auth-action-button signup-button" type="submit" [disabled]="!signup.valid">Sign up</button>
   </form>

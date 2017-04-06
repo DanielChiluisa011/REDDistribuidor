@@ -40,12 +40,12 @@ export class ListingPage {
   // Manejo socket
   @ViewChild(Content) content: Content;
   messages: any = [];
-  socketHost: string = 'http://192.168.1.111:8080/';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   chat:any;
   username: string;
   zone:any;
-  lstJourneys: any = [];
+  lstOrders: any = [];
   // Fin manejo socket
   
   
@@ -59,14 +59,22 @@ export class ListingPage {
   
 
   constructor(public NavCtrl:NavController, public storage: Storage) {
-    //this.data.journeys=[{journey_id:1, title:'Ruta 1', description:'Descripción de ruta 1', tires: 100},{journey_id:2, title:'Ruta 2', description:'Descripción de ruta 2', tires: 200},{journey_id:3, title:'Ruta 3', description:'Descripción de ruta 3', tires: 300}];
     // Manejo socket
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
-    this.socket.emit('SelectJourneys','ex app');
-    this.socket.on('SelectJourneys',(data)=>{
-      this.lstJourneys = data;
-    });  
+    // this.socket.emit('SelectJourneys','ex app');
+    // this.socket.on('SelectJourneys',(data)=>{
+    //   this.lstJourneys = data;
+    // });  
+    this.storage.get('Distributor').then((val)=>{
+        this.socket.emit('RequestDistOrders',val.DistributorId);
+        this.socket.on('DistOrders',(data)=>{
+          this.lstOrders = data;
+          for(var i = 0 ; i < this.lstOrders.length ; i++ ){
+            console.log(this.lstOrders[i]);
+          }
+        });  
+    });
     // Fin Manejo socket
   }
   
