@@ -59,19 +59,22 @@ export class LoginPage {
     this.socket.emit('AppDataUsersRequest','ex app');
     this.socket.on('AppSelectUsers',(data)=>{
       // console.log(data.length);
+      this.lstUsers=[];
       this.lstUsers = data;
     // });  
     // console.log('doLogin '+this.lstUsers.length);
     // console.log('numero de usuarios: '+this.lstUsers.length)
     var flag=false;
     for(var i=0;i<this.lstUsers.length;i++){
-      // console.log(this.login.get('email').value+' '+this.lstUsers[i].user.UserEmail)
-      if(this.login.get('email').value==this.lstUsers[i].user.UserEmail && this.login.get('password').value==this.lstUsers[i].user.UserPassword){
+      // console.log(this.lstUsers[i].user);
+      if(this.login.get('email').value==this.lstUsers[i].user.USEREMAIL && this.login.get('password').value==this.lstUsers[i].user.USERPASSWORD){
         flag=true;
         this.storage.set('user', this.lstUsers[i].user);
         this.storage.set('person', this.lstUsers[i].person);
-        this.socket.emit('RequestDistributorData',this.lstUsers[i].person.PersonCi);
+        console.log("ID persona "+this.lstUsers[i].person.PERSONID)
+        this.socket.emit('RequestDistributorData',this.lstUsers[i].person.PERSONID);
         this.socket.on('DistributorData',(data)=>{
+          console.log(data[0]);
             this.storage.set('Distributor', data[0]);
         });
         // console.log('Persona logueada '+this.storage.get('person'))

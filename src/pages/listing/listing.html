@@ -3,11 +3,19 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Inicio</ion-title>
+    <ion-title>TODOS LOS PEDIDOS</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="add">Nuevo</ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="card-background-page">
+  <ion-col no-padding >
+    <button ion-button block class="signup-button" (click)="GoToNewOrders()">Nuevo Pedido</button>
+  </ion-col>
   <!--<background-image class="image-heading" [src]="listing.banner_image">
     <ion-row class="heading-row">
       <ion-col no-padding width-100>
@@ -27,26 +35,23 @@
    </ion-item>
 </ion-list>-->
 
-  <ion-card *ngFor="let order of lstOrders">
-
-    
-    <ion-card-header> 
-      <h1>Código de viaje: {{order.OrderId}}</h1>
+  <ion-card *ngFor='let elem of lstOrders'>
+    <ion-card-header > 
+      <h1>Número de Pedido: {{elem.OrderId}}</h1>
     </ion-card-header>
     <ion-card-content>
       <div>
-      <p>Fecha: {{order.OrderDate}}</p>
-      <p>Estado: {{order.OrderState}}</p> 
+      <p>Fecha de Pedido: {{elem.OrderDate}}</p>
+      <p>Estado del Pedido: {{elem.OrderState}}</p>
+      <p>Fecha de Viaje: {{elem.JourneyDate}}</p> 
+      <p>Estado del Viaje: {{elem.JourneyDate}}</p> 
       </div>
       <br>
       <div align="center">
-      <button ion-button color="secondary" >Aceptar</button>
+      <button ion-button color="secondary" (click)='loadCards()'>Aceptar</button>
       <button ion-button color="danger">Rechazar</button> 
       </div>
     </ion-card-content>
     </ion-card>
-
-
-   
 </ion-content>
 

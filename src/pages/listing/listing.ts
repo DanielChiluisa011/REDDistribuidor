@@ -1,6 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, LoadingController, Content } from 'ionic-angular';
-
+import { OrdersPage } from '../Orders/Orders';
 
 // import { FeedPage } from '../feed/feed';
 import 'rxjs/Rx';
@@ -46,6 +46,8 @@ export class ListingPage {
   username: string;
   zone:any;
   lstOrders: any = [];
+  AuxOrders:any = [];
+  // lstJourneys: any =[];
   // Fin manejo socket
   
   
@@ -58,27 +60,30 @@ export class ListingPage {
 
   
 
-  constructor(public NavCtrl:NavController, public storage: Storage) {
-    // Manejo socket
+  constructor(
+    public nav: NavController, 
+    public storage: Storage
+  ) {
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
-    // this.socket.emit('SelectJourneys','ex app');
-    // this.socket.on('SelectJourneys',(data)=>{
-    //   this.lstJourneys = data;
-    // });  
     this.storage.get('Distributor').then((val)=>{
+        var ObjOrder;
+        console.log(val.DistributorId)
         this.socket.emit('RequestDistOrders',val.DistributorId);
         this.socket.on('DistOrders',(data)=>{
           this.lstOrders = data;
-          for(var i = 0 ; i < this.lstOrders.length ; i++ ){
-            console.log(this.lstOrders[i]);
+          for(var i=0;i<this.lstOrders.length;i++){
+            console.log('Id pedido '+this.lstOrders[i].OrderId+' Id viaje'+this.lstOrders[i].JourneyId)
           }
         });  
     });
-    // Fin Manejo socket
   }
-  
-  
+
+  GoToNewOrders(){
+     this.nav.push(OrdersPage)
+  }
+
+
   // ionViewDidLoad() {
   //   this.loading.present();
   //   this.listingService

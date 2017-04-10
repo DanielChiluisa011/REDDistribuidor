@@ -39,18 +39,22 @@ export class DistributorInformation {
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
     this.storage.get('person').then((val)=>{
-      this.socket.emit('RequestDistributorData',val.PersonCi);
+      console.log('PersonID '+val.PERSONID)
+      this.socket.emit('RequestDistributorData',val.PERSONID);
     });
     this.socket.on('DistributorData',(data)=>{
       this.DistributorSelected = data[0];
-      $('#MapImage').attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+data.CoordX+","+data.CoordY+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+data.CoordX+","+data.CoordY+"");     
-      this.storage.set('Distributor',this.DistributorSelected);
-      this.Form.setValue({name: this.DistributorSelected.DistributorName,
-                          address: this.DistributorSelected.DistributorAddress,
-                          phone: this.DistributorSelected.DistributorPhone,
-                          licence: this.DistributorSelected.DistributorEnvironmentalLicense
-                        });
-    });
+      // this.storage.get('Distributor').then((val)=>{
+        // alert(data[0].DistributorName);
+          this.Form.setValue({name: data[0].DistributorName,
+                              address: data[0].DistributorAddress,
+                              phone: data[0].DistributorPhone,
+                              licence: data[0].DistributorEnvironmentalLicense
+          });
+          $('#MapImage').attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+data[0].CoordX+","+data[0].CoordY+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+data[0].CoordX+","+data[0].CoordY+"");     
+      });
+      
+    // });
     // Fin Manejo socket   
   }
   // SetInfo(){
