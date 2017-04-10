@@ -5,8 +5,10 @@
     </button>
     <ion-title>TODOS LOS PEDIDOS</ion-title>
     <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="add"></ion-icon>
+      <button ion-button (click)="GoToNewOrders()">
+        <strong>
+          <ion-icon style="font-size: 50px;" name="add"></ion-icon>
+        </strong>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -43,14 +45,10 @@
       <div>
       <p>Fecha de Pedido: {{elem.OrderDate}}</p>
       <p>Estado del Pedido: {{elem.OrderState}}</p>
-      <p>Fecha de Viaje: {{elem.JourneyDate}}</p> 
+      <p>Fecha de Viaje: {{elem.JourneyState}}</p> 
       <p>Estado del Viaje: {{elem.JourneyDate}}</p> 
       </div>
       <br>
-      <div align="center">
-      <button ion-button color="secondary" (click)='loadCards()'>Aceptar</button>
-      <button ion-button color="danger">Rechazar</button> 
-      </div>
     </ion-card-content>
     </ion-card>
 </ion-content>

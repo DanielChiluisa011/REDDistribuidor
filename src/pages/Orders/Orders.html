@@ -61,7 +61,6 @@
     <!--<div *ngSwitchCase="'event'" class="event-example-view">-->
       <form class="sample-form event-form" [formGroup]="order_form" (ngSubmit)="createOrder()">
         <section class="form-section">
-          <!--<h2 class="section-title">Add an event</h2>-->
           <ion-item>
             <ion-label floating>Número de Pedido</ion-label>
             <ion-input type="text" formControlName="num"></ion-input>
@@ -75,8 +74,9 @@
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
           <ion-item>
-            <select id="cmbNewOrderWaste" formControlName="waste">
-            </select>
+            <ion-select id="cmbNewOrderWaste" formControlName="waste">
+              <ion-option *ngFor="let key of lstWaste">{{key.WASTEDESCRIPTION }}</ion-option>
+            </ion-select>
           </ion-item>
         </section>
         <section class="form-section">

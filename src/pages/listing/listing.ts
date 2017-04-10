@@ -68,7 +68,7 @@ export class ListingPage {
     this.zone= new NgZone({enableLongStackTrace: false});
     this.storage.get('Distributor').then((val)=>{
         var ObjOrder;
-        console.log(val.DistributorId)
+        // console.log(val.DistributorId)
         this.socket.emit('RequestDistOrders',val.DistributorId);
         this.socket.on('DistOrders',(data)=>{
           this.lstOrders = data;

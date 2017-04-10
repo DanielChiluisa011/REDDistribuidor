@@ -36,11 +36,6 @@ export class OrdersPage {
     this.zone= new NgZone({enableLongStackTrace: false});
     this.socket.on('selectWaste',(data)=>{
     this.lstWaste = data;
-      $('#cmbNewOrderWaste').empty();
-       	$('#cmbNewOrderWaste').append('<option> Seleccione un tipo de desecho</option>');
-       	for (var i = 0; i < this.lstWaste.length; i++) {
-	   		$('#cmbNewOrderWaste').append(new Option(this.lstWaste[i].WasteName, 'name',true,true));
-	   	}
     });  
     this.order_form = new FormGroup({
       num: new FormControl('', Validators.required),
@@ -61,7 +56,7 @@ export class OrdersPage {
 
 
   createOrder(){
-    //alert(this.order_form.get('num').value+' '+this.order_form.get('date').value+' '+this.order_form.get('quantity').value+' '+$('#cmbNewOrderWaste').index());
+    alert(this.order_form.get('num').value+' '+this.order_form.get('date').value+' '+this.order_form.get('quantity').value+' '+$('#cmbNewOrderWaste').index());
     // this.storage.get('Distributor').then((val)=>{
     //     var ObjOrder = {
     //       id: this.order_form.get('num'),
