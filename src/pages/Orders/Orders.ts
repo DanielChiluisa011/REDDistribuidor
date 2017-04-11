@@ -31,10 +31,14 @@ export class OrdersPage {
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
     this.socket.on('selectWaste',(data)=>{
-    this.lstWaste = data;
-    });  
+      this.lstWaste = data;
+    });
+    this.socket.emit('RequestNumOrder','');
+    this.socket.on('RespondeNumOrder',((val)=>{
+      this.items=val[0].MAXORDER;
+    }));
     this.order_form = new FormGroup({
-      num: new FormControl('', Validators.required),
+      num: new FormControl(this.items, Validators.required),
       date: new FormControl(new Date().toISOString(), Validators.required),
       quantity: new FormControl('', Validators.required),
       waste: new FormControl('', Validators.required),
