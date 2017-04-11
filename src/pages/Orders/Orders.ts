@@ -27,10 +27,6 @@ export class OrdersPage {
     public storage: Storage,
     public alertCtrl: AlertController
   ) {
-    // this.items.push({ value: 1, text: 'Super Distributor', checked: false });
-    // this.items.push({ value: 2, text: 'Distributor', checked: false });
-    // this.items.push({ value: 3, text: 'Retailer', checked: false });
-    // this.items.push({ value: 4, text: 'End User', checked: false });
     this.section = "event";
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
@@ -39,7 +35,7 @@ export class OrdersPage {
     });  
     this.order_form = new FormGroup({
       num: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
+      date: new FormControl(new Date().toISOString(), Validators.required),
       quantity: new FormControl('', Validators.required),
       waste: new FormControl('', Validators.required),
     });
@@ -56,7 +52,7 @@ export class OrdersPage {
 
 
   createOrder(){
-    alert(this.order_form.get('num').value+' '+this.order_form.get('date').value+' '+this.order_form.get('quantity').value+' '+$('#cmbNewOrderWaste').index());
+    alert(this.order_form.get('num').value+' '+this.order_form.get('date').value+' '+this.order_form.get('quantity').value+' '+this.order_form.get('waste').value);
     // this.storage.get('Distributor').then((val)=>{
     //     var ObjOrder = {
     //       id: this.order_form.get('num'),

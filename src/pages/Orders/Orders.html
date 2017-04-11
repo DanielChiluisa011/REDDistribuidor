@@ -67,15 +67,16 @@
           </ion-item>
           <ion-item class="multi-input time-item">
             <ion-label floating>Fecha</ion-label>
-            <ion-datetime formControlName="date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+            <ion-datetime formControlName="date" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD">{{date | date:'yyyy-MM-dd'}}</ion-datetime>
           </ion-item>
           <ion-item>
             <ion-label floating>Cantidad</ion-label>
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-select id="cmbNewOrderWaste" formControlName="waste">
-              <ion-option *ngFor="let key of lstWaste">{{key.WASTEDESCRIPTION }}</ion-option>
+            <ion-label >Seleccione un desecho</ion-label>
+            <ion-select formControlName="waste">
+              <ion-option *ngFor="let key of lstWaste" [value]="key.WASTEONU">{{key.WASTEDESCRIPTION }}</ion-option>
             </ion-select>
           </ion-item>
         </section>
