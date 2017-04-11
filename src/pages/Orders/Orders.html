@@ -61,10 +61,6 @@
     <!--<div *ngSwitchCase="'event'" class="event-example-view">-->
       <form class="sample-form event-form" [formGroup]="order_form" (ngSubmit)="createOrder()">
         <section class="form-section">
-          <ion-item>
-            <ion-label floating>Número de Pedido</ion-label>
-            <ion-input type="text" formControlName="num"></ion-input>
-          </ion-item>
           <ion-item class="multi-input time-item">
             <ion-label floating>Fecha</ion-label>
             <ion-datetime formControlName="date" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"></ion-datetime>
@@ -74,6 +70,32 @@
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label >Seleccione un desecho</ion-label>
+            <ion-select formControlName="waste">
+              <ion-option *ngFor="let key of lstWaste" [value]="key.WASTEONU">{{key.WASTEDESCRIPTION }}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-label>
+
+            <ion-row >
+              <ion-label>
+                <span class="radio-tags-label">TIPO DE PEDIDO</span>
+              </ion-label>
+              <ion-list class="radio-tags" radio-group >
+                <ion-item class="radio-tag">
+                  <ion-label>General</ion-label>
+                  <ion-radio value="dollar"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>
+                    <span>Privado</span>
+                  </ion-label>
+                  <ion-radio value="euro"></ion-radio>
+                </ion-item>
+              </ion-list>
+            </ion-row>
+          </ion-label>
+           <ion-item>
             <ion-label >Seleccione un desecho</ion-label>
             <ion-select formControlName="waste">
               <ion-option *ngFor="let key of lstWaste" [value]="key.WASTEONU">{{key.WASTEDESCRIPTION }}</ion-option>

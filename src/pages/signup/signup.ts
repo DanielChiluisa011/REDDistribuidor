@@ -1,6 +1,6 @@
 import { Component,NgZone } from '@angular/core';
 import { NavController, ModalController, LoadingController,ToastController } from 'ionic-angular';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
@@ -20,10 +20,13 @@ import * as $ from 'jquery';
 export class SignupPage {
   signup: FormGroup;
   loading: any;
-  socketHost: string = 'http://34.195.35.232:8080';
+  socketHost: string = 'http://34.195.35.232:8080/';
   socket:any;
   zone:any;
   lstUsers: any=[];
+  maxlengt: any;
+  errorMsg: any;
+  // enabledCi: boolean;
   constructor(
     public nav: NavController,
     public modal: ModalController,
@@ -31,29 +34,62 @@ export class SignupPage {
     public googleLoginService: GoogleLoginService,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public storage: Storage
+    public storage: Storage,
+    private fb: FormBuilder
   ) {
     this.signup = new FormGroup({
-      ci: new FormControl('', Validators.required),
+      rdbciruc: new FormControl('rdbci'),
+      // rdbruc: new FormControl(),
+      
+      ci: new FormControl(''),
       name: new FormControl('', Validators.required),
       lastName: new FormControl('',Validators.required),
       phone: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
-      ruc: new FormControl('', ),
+      // ruc: new FormControl('', ),
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       confirm_password: new FormControl('', Validators.required),
-      role: new FormControl('')
+      // role: new FormControl('', Validators.required)
     });
+
+    // let control = this.signup.controls['ci'];
+    // if (!control.valid) {
+    //   if (control.errors['required']) {
+    //     this.errorMsg = 'Provide a username please';
+    //   } else if (control.errors['minlength']) {
+    //     this.errorMsg = 'The username must have at least 5 characters';
+    //   }
+    // }
+
+    // this.signup = this.fb.group({
+    //   value: ['rdbci']
+    // });
+
     // Manejo socket
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
     this.socket.emit('AppDataUsersRequest','ex app');
     this.socket.on('AppSelectUsers',(data)=>{
       this.lstUsers = data;
-      alert('Usuarios devueltos: '+data.length);
     });  
     // Fin Manejo socket
+    this.signup.get('ci').disable();
+    this.selectCiRuc();
+  }
+
+  selectCiRuc(){
+   
+    if(this.signup.get('rdbciruc').value=='rdbci'){  
+      this.maxlengt=10;
+      this.signup.get('ci').setValidators(Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)]));
+      this.signup.get('ci').enable();
+    }else{
+      this.signup.get('ci').setValidators(Validators.compose([Validators.required,Validators.minLength(13),Validators.maxLength(13)]));
+      this.maxlengt=13;
+      this.signup.get('ci').enable();
+ 
+    }
   }
 
   Vcedula()
@@ -92,7 +128,6 @@ export class SignupPage {
     }
 
   doSignup(){
-    // alert(this.lstUsers.length);
     var flag=false;
     for(var i=0;i<this.lstUsers.length;i++){
       console.log(this.lstUsers[i].person.PersonCi+" "+this.signup.get('ci').value);
@@ -125,7 +160,7 @@ export class SignupPage {
                       message: 'Tu solicitud de registro esta siendo procesada. Le notificaremos cuando su solicitud sea aceptada. Gracias',
                       duration: 4000,
                       position: 'center',
-                      showCloseButton: true
+                          
                     });
                 toast.present();
             }else{

@@ -1,29 +1,54 @@
 <ion-header class="signup-header auth-header">
   <ion-navbar>
-    <ion-title>Sign up</ion-title>
+    <ion-title>CREAR NUEVA CUENTA</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="signup-content auth-content">
-  <h2 class="auth-title">Crear una Cuenta</h2>
-  <form class="signup-form auth-form" [formGroup]="signup" >
-    <ion-item>
-      <ion-input type="number" placeholder="Cédula de identidad" formControlName="ci"></ion-input>
-    </ion-item>
+  <h2 class="auth-title">CREAR NUEVA CUENTA</h2>
+  <form class="signup-form auth-form" [formGroup]="signup">
+
+    
+      <ion-list radio-group formControlName="rdbciruc" >
+        <ion-grid>
+          <ion-row >
+ 
+            <ion-col >
+              <ion-label>Cédula  <ion-radio value="rdbci" (click)='selectCiRuc()'></ion-radio></ion-label> 
+            </ion-col>
+
+            <ion-col>
+            <ion-label>RUC  <ion-radio value="rdbruc"  (click)='selectCiRuc()' ></ion-radio></ion-label>
+            </ion-col>
+  
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+
+    <ion-item >
+    <ion-input  type="tel" placeholder="Cédula de identidad / RUC {{maxlengt}}" formControlName="ci" maxlength="13"></ion-input>
+    </ion-item >
+
+    <div *ngIf="maxlengt==10">
+     <p *ngIf="signup.get('ci').hasError('minlength')||signup.get('ci').hasError('maxlength')" color="danger">Debe tener 10 dígitos</p>
+    </div>
+
+    <div *ngIf="maxlengt==13">
+      <p *ngIf="signup.get('ci').hasError('minlength')||signup.get('ci').hasError('maxlength')" color="danger">Debe tener 13 dígitos</p>
+    </div>
+
     <ion-item>
       <ion-input type="input" placeholder="Nombres" formControlName="name"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-input type="input" placeholder="Apellidos" formControlName="lastName"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="phone" placeholder="Teléfono" formControlName="phone"></ion-input>
+      <ion-input type="tel" placeholder="Teléfono" formControlName="phone"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="input" placeholder="Dirección" formControlName="address"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="number" placeholder="RUC" formControlName="ruc"></ion-input>
     </ion-item>
     <ion-item> 
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
@@ -37,8 +62,12 @@
       <ion-item>
         <ion-input type="password" placeholder="Confirm password" formControlName="confirm_password" show-hide-input></ion-input>
       </ion-item>
+      <!--<ion-item>
+       <ion-input type="input" placeholder="Distribuidor"  disabled="{{isDisabled}}" formControlName="role"></ion-input>
+      </ion-item>-->
+
     </show-hide-container>
-    <button ion-button block class="auth-action-button signup-button" type="submit" [disabled]="!signup.valid">Sign up</button>
+    <button ion-button block class="auth-action-button signup-button" type="submit" [disabled]="!signup.valid">CREAR NUEVA CUENTA</button>
   </form>
   <!--<p class="auth-divider">
     Or
