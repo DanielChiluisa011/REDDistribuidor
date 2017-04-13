@@ -8,6 +8,7 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { GoogleLoginService } from '../google-login/google-login.service';
+import { Instructions } from '../Instructions/walkthrough';
 
 import * as io from 'socket.io-client';
 import { Storage } from '@ionic/storage';
@@ -25,7 +26,9 @@ export class LoginPage {
   // Fin manejo socket
   login: FormGroup;
   main_page: { component: any };
+  InstructionsPage: { component: any}
   loading: any;
+
   
 
   constructor(
@@ -38,6 +41,7 @@ export class LoginPage {
   ) {
     
     this.main_page = { component: TabsNavigationPage };
+    this.InstructionsPage = { component: Instructions };
 
     this.login = new FormGroup({
       email: new FormControl('', Validators.required),
@@ -74,8 +78,12 @@ export class LoginPage {
         console.log("ID persona "+this.lstUsers[i].person.PERSONID)
         this.socket.emit('RequestDistributorData',this.lstUsers[i].person.PERSONID);
         this.socket.on('DistributorData',(data)=>{
-          console.log(data[0]);
+          if(data==0){
+            this.nav.setRoot(this.InstructionsPage.component);
+          }else{
+            console.log(data[0]);
             this.storage.set('Distributor', data[0]);
+          }
         });
         // console.log('Persona logueada '+this.storage.get('person'))
         break;
@@ -85,7 +93,13 @@ export class LoginPage {
       // console.log(this.lstUsers[i].user.UserEmail+' '+this.lstUsers[i].user.UserPassword);
     }
     if(flag){
-      this.nav.setRoot(this.main_page.component);
+      // this.storage.get('Distributor').then((val)=>{
+          // if(val!=null){
+            this.nav.setRoot(this.main_page.component);
+          // }else{
+            
+          // }
+      // })
     }else{
       let env = this;
       let toast = env.toastCtrl.create({

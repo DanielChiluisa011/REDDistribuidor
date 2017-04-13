@@ -1,5 +1,5 @@
 import { Component, NgZone,ViewChild, OnInit } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, LoadingController,AlertController, ToastController } from 'ionic-angular';
 import { Keyboard, Geolocation,Geoposition} from 'ionic-native';
 
 import { Observable } from 'rxjs/Observable';
@@ -35,19 +35,20 @@ export class MapsPageSignUp implements OnInit {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public GoogleMapsService: GoogleMapsServiceSignUp,
+    public alertCtrl: AlertController,
     // public DistInformation: DistributorInformation,
     public storage: Storage
   ) {
     this.signup_page = { component: DistributorInformation };
     this.geolocateMe();
-    let env = this;
-    let toast = env.toastCtrl.create({
-          message: 'Por favor, Mueva el marcador hacia la ubicación exacta de su local de distribución',
-          position: 'middle',
-          showCloseButton: true
+     let alert = this.alertCtrl.create({
+          title: 'POSICIONAMIENTO',
+          subTitle: 'Por favor, Mueva el marcador hacia la ubicación exacta de su local de distribución',
+          buttons: ['Dismiss']
         });
-    toast.present();
+    alert.present();
   }
+
 
   ngOnInit() {
     let _loading = this.loadingCtrl.create();

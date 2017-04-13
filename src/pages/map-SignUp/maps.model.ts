@@ -56,7 +56,7 @@ export class MapsModel {
       position: location,
       map: this.map,
 			draggable: true,
-      icon: './assets/images/maps/truck.png'
+      icon: './assets/images/maps/llanta.png'
     });
 
 		this.map_places.push(_map_place);
@@ -70,7 +70,7 @@ export class MapsModel {
 		_map_place.marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      icon: './assets/images/maps/truck.png'
+      icon: './assets/images/maps/llanta.png'
     });
 
 		this.map_places.push(_map_place);

@@ -50,6 +50,21 @@
       </div>
       <br>
     </ion-card-content>
-    </ion-card>
+  </ion-card>
+
+  <ion-card *ngFor='let elem of lstOrdersP'>
+    <ion-card-header > 
+      <h1>Número de Pedido: {{elem.ORDERID}}</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+      <p>Fecha de Pedido: {{elem.ORDERDATE}}</p>
+      <p>Estado del Pedido: {{elem.ORDERSTATE}}</p>
+      <p>Fecha Límite: {{elem.ORDERDEADLINE}}</p> 
+      <!--<p>Estado del Viaje: {{elem.JourneyDate}}</p> -->
+      </div>
+      <br>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 

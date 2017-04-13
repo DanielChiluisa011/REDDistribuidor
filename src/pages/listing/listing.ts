@@ -17,24 +17,6 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'listing.html',
 })
 
-// @Component({
-//     selector:'my-app',
-//     template: `
-//     <ul>
-//       <li *ngFor="let journey of journeys">
-//         {{lst.title}}
-//       </li>
-//     </ul>
-//     `
-//     // template: `
-//     //   <ion-card *ngFor="let journey of journeys">
-//     //     <div class="card-title">{{lst.title}}</div>
-//     //   </ion-card>
-//     // `
-// })
-
-
-
 export class ListingPage {
 
   // Manejo socket
@@ -46,20 +28,8 @@ export class ListingPage {
   username: string;
   zone:any;
   lstOrders: any = [];
+  lstOrdersP: any = [];
   AuxOrders:any = [];
-  // lstJourneys: any =[];
-  // Fin manejo socket
-  
-  
-  // lst=[{id:1, title:'Ruta 1'},{id:2, title:'Ruta 2'},{id:3, title:'Ruta 3'}];
-
-  // listing: ListingModel = new ListingModel();
-  // loading: any;
-
-
-
-  
-
   constructor(
     public nav: NavController, 
     public storage: Storage
@@ -68,14 +38,20 @@ export class ListingPage {
     this.zone= new NgZone({enableLongStackTrace: false});
     this.storage.get('Distributor').then((val)=>{
         var ObjOrder;
-        // console.log(val.DistributorId)
         this.socket.emit('RequestDistOrders',val.DistributorId);
         this.socket.on('DistOrders',(data)=>{
           this.lstOrders = data;
-          for(var i=0;i<this.lstOrders.length;i++){
-            console.log('Id pedido '+this.lstOrders[i].OrderId+' Id viaje'+this.lstOrders[i].JourneyId)
-          }
-        });  
+          // for(var i=0;i<this.lstOrders.length;i++){
+          //   console.log('Id pedido '+this.lstOrders[i].OrderId+' Id viaje'+this.lstOrders[i].JourneyId)
+          // }
+        });
+        this.socket.emit('RequestDistOrdersP',val.DistributorId);
+        this.socket.on('DistOrdersP',(data)=>{
+          this.lstOrdersP = data;
+          // for(var i=0;i<this.lstOrders.length;i++){
+          //   console.log('Id pedido '+this.lstOrders[i].OrderId+' Id viaje'+this.lstOrders[i].JourneyId)
+          // }
+        });
     });
   }
 

@@ -9,6 +9,8 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { DistributorInformation } from '../pages/Distributor-Information/contact-card';
+import { InsertInformation } from '../pages/InsertInformation/InsertInformation';
+import { Instructions } from '../pages/Instructions/walkthrough';
 
 @Component({
   selector: 'app-root',

@@ -60,6 +60,8 @@ import { GoogleMapsServiceSignUp } from '../pages/map-SignUp/maps.service';
 import { DistributorInformation } from '../pages/Distributor-Information/contact-card';
 import { OrdersPage } from '../pages/Orders/Orders';
 import {PopoverPage} from '../pages/maps/maps';
+import { InsertInformation } from '../pages/InsertInformation/InsertInformation';
+import { Instructions } from '../pages/Instructions/walkthrough';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import {PopoverPage} from '../pages/maps/maps';
     PrivacyPolicyPage,
     MapsPageSignUp,
     DistributorInformation,
+    InsertInformation,
+    Instructions,
     MapsPage,
     FunctionalitiesPage,
     FacebookLoginPage,
@@ -135,6 +139,8 @@ import {PopoverPage} from '../pages/maps/maps';
     OrdersPage,
     PopoverPage,
     DistributorInformation,
+    InsertInformation,
+    Instructions,
     MapsPage,
     FunctionalitiesPage,
     FacebookLoginPage,
@@ -155,6 +161,7 @@ import {PopoverPage} from '../pages/maps/maps';
     GoogleMapsService,
     GoogleMapsServiceSignUp,
     DistributorInformation,
+    Instructions,
     OrdersPage,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

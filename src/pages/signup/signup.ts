@@ -139,7 +139,7 @@ export class SignupPage {
     if(!flag){
         if(this.Vcedula()){
         if(this.signup.get('ci').value!="" && this.signup.get('name').value!=""&&this.signup.get('lastName').value!=""&&this.signup.get('phone').value!=""
-          &&this.signup.get('address').value!=""&&this.signup.get('email').value!=""&&this.signup.get('role').value!=""&&this.signup.get('password').value!=""
+          &&this.signup.get('address').value!=""&&this.signup.get('email').value!=""&&this.signup.get('password').value!=""
           &&this.signup.get('confirm_password').value!=""){
             if(this.signup.get('confirm_password').value==this.signup.get('password').value){
                 let NewUser={
@@ -148,19 +148,16 @@ export class SignupPage {
                   lastName: this.signup.get('lastName').value,
                   phone: this.signup.get('phone').value,
                   address: this.signup.get('address').value,
-                  ruc: this.signup.get('ruc').value,
-                  role: this.signup.get('role').value,
+                  role: 'Distribuidor',
                   email: this.signup.get('email').value,
                   pass: this.signup.get('password').value
                 };
-                alert(this.storage.get('Position'));
-                // this.socket.emit('AppNewUserRequest',NewUser);
+                this.socket.emit('AppNewUserRequest',NewUser);
                 let env = this;
                 let toast = env.toastCtrl.create({
                       message: 'Tu solicitud de registro esta siendo procesada. Le notificaremos cuando su solicitud sea aceptada. Gracias',
                       duration: 4000,
                       position: 'center',
-                          
                     });
                 toast.present();
             }else{
@@ -199,7 +196,7 @@ export class SignupPage {
             });
         toast.present();
     }
-    alert(flag);
+    // alert(flag);
   }
 
   doFacebookSignup() {
@@ -259,3 +256,4 @@ export class SignupPage {
   }
 
 }
+
