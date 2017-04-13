@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
-
+import { MapsPageSignUp } from '../map-SignUp/maps';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { InsertInformation } from '../InsertInformation/InsertInformation';
@@ -34,7 +34,7 @@ export class Instructions {
   }
 
   goToLogin() {
-    this.nav.push(InsertInformation);
+    this.nav.push(MapsPageSignUp);
   }
 
   goToSignup() {

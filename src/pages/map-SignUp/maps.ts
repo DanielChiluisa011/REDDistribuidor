@@ -88,20 +88,11 @@ export class MapsPageSignUp implements OnInit {
   
   SaveCoords(){
     var coord=this.userMarker.marker.getPosition();
-    // alert(this.DistInformation.lstDistributors.length);
-    // this.DistInformation.MapImage.attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+coord.lat()+","+coord.lng()+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+coord.lat()+","+coord.lng()+"")
-    // this.storage.get('MapImage').then((img)=>{
-    //   img.attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+coord.lat()+","+coord.lng()+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+coord.lat()+","+coord.lng()+"")
-    // });
+
     this.storage.set('DistPosX',coord.lat());
     this.storage.set('DistPosY',coord.lng());
-    // alert(this.userMarker.marker.getPosition());
-    // this.storage.get('Position').then((val)=>{
-    //   alert('position: '+val);
-    // }); 
     let env = this;
     this.nav.pop();
-    // env.nav.setRoot(env.signup_page.component);
   }
 
   setOrigin(location: google.maps.LatLng){
