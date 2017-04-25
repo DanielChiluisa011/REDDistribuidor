@@ -15,8 +15,8 @@ export class TabsNavigationPage {
   tab3Root: any;
 
   constructor() {
-    this.tab1Root = ListingPage;
+    this.tab1Root = OrdersPage;
     this.tab2Root = NotificationsPage;
-    this.tab3Root = OrdersPage;
+    this.tab3Root = ListingPage;
   }
 }

@@ -78,7 +78,7 @@ export class InsertInformation {
                   buttons: ['Ok']
                 });
             alert.present();
-            this.nav.push(MapsPageSignUp);
+            this.nav.push(TabsNavigationPage);
             // console.log(objDist); 
         })  
         // console.log(this.Form.get('name').value+"  "+this.Form.get('address').value+"  "+this.Form.get('phone').value+"  "+this.Form.get('licence').value+"  "+this.Form.get('ruc').value+" Coordenadas "+x+","+y);
@@ -86,10 +86,9 @@ export class InsertInformation {
     })
     
   }
-
   SetPosition(){
     // this.storage.set('MapImage',$('#MapImage'));
-    this.nav.push(TabsNavigationPage);
+    this.nav.push(MapsPageSignUp);
     // env.nav.setRoot(env.maps_page.component);
   }
 

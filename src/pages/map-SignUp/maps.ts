@@ -44,7 +44,7 @@ export class MapsPageSignUp implements OnInit {
      let alert = this.alertCtrl.create({
           title: 'POSICIONAMIENTO',
           subTitle: 'Por favor, Mueva el marcador hacia la ubicación exacta de su local de distribución',
-          buttons: ['Dismiss']
+          buttons: ['Ok']
         });
     alert.present();
   }

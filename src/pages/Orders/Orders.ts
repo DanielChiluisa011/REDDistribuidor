@@ -74,10 +74,10 @@ export class OrdersPage {
         let alert = this.alertCtrl.create({
           title: 'GUARDADO',
           subTitle: 'Su pedido ha sido creado correctamente',
-          buttons: ['Dismiss']
+          buttons: ['Ok']
         });
         alert.present();
-        this.nav.setRoot(this.TabsPage.component);
+        this.nav.push(TabsNavigationPage);
     });
     
   }

@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>NUEVO PEDIDO</ion-title>
   </ion-navbar>
 </ion-header>
@@ -12,7 +15,7 @@
             <ion-datetime formControlName="date" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"></ion-datetime>
           </ion-item>
           <ion-item>
-            <ion-label floating>Cantidad</ion-label>
+            <ion-label floating>Cantidad (# de llantas)</ion-label>
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
           <ion-item>
@@ -46,7 +49,7 @@
           </ion-item>
         </section>
         <section class="form-section">
-          <button ion-button block class="form-action-button" type="submit" [disabled]="!order_form.valid">Done!</button>
+          <button ion-button block class="form-action-button" type="submit" [disabled]="!order_form.valid">Guardar</button>
         </section>
       </form>
 </ion-content>

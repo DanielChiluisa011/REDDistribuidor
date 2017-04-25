@@ -34,7 +34,7 @@ export class Instructions {
   }
 
   goToLogin() {
-    this.nav.push(MapsPageSignUp);
+    this.nav.push(InsertInformation);
   }
 
   goToSignup() {

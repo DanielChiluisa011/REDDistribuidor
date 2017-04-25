@@ -1,5 +1,5 @@
 import { Component,NgZone } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,AlertController } from 'ionic-angular';
 import { CallNumber, SocialSharing, InAppBrowser } from 'ionic-native';
 import { MapsPageSignUp } from '../map-SignUp/maps';
 import { ContactModel } from './contact.model';
@@ -25,77 +25,108 @@ export class DistributorInformation {
   MapImage: any;
   constructor(
     public nav: NavController,
-    public storage: Storage
+    public storage: Storage,
+    public alertCtrl: AlertController,
   ) {
 
      this.Form = new FormGroup({
-        name: new FormControl('', Validators.required),
+        name: new FormControl({value: '' , disabled: true}, Validators.required),
         address: new FormControl('', Validators.required),
         phone: new FormControl('', Validators.required),
-        licence: new FormControl('',Validators.required)
+        licence: new FormControl('',Validators.required),
+        ruc: new FormControl('',Validators.required)
     });
     this.maps_page = { component: MapsPageSignUp };
 
     this.socket=io.connect(this.socketHost);
     this.zone= new NgZone({enableLongStackTrace: false});
     this.storage.get('person').then((val)=>{
-      console.log('PersonID '+val.PERSONID)
       this.socket.emit('RequestDistributorData',val.PERSONID);
     });
     this.socket.on('DistributorData',(data)=>{
       this.DistributorSelected = data[0];
-      // this.storage.get('Distributor').then((val)=>{
-        // alert(data[0].DistributorName);
           this.Form.setValue({name: data[0].DistributorName,
                               address: data[0].DistributorAddress,
                               phone: data[0].DistributorPhone,
-                              licence: data[0].DistributorEnvironmentalLicense
+                              licence: data[0].DistributorEnvironmentalLicense,
+                              ruc: data[0].DistributorRuc,
           });
+          this.storage.set('DistPosX',data[0].CoordX);
+          this.storage.set('DistPosY',data[0].CoordY);
           $('#MapImage').attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+data[0].CoordX+","+data[0].CoordY+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+data[0].CoordX+","+data[0].CoordY+"");     
       });
-      
-    // });
-    // Fin Manejo socket   
+      this.Form.disable();
   }
-  // SetInfo(){
-  //   console.log(this.lstDistributors.length);
-  //     for(var i=0;i<this.lstDistributors.length;i++){
-  //       console.log(this.lstDistributors[i].PersonContact+' '+this.user.PersonCi);
-  //       if(this.lstDistributors[i].PersonContact==this.user.PersonCi){
-  //           this.DistributorSelected=this.lstDistributors[i];
-  //           break;
-  //       }
-  //     }
-  // }
-  call(number: string){
-    CallNumber.callNumber(number, true)
-    .then(() => console.log('Launched dialer!'))
-    .catch(() => console.log('Error launching dialer'));
+  UpdateInformation(){
+    if($('#BtnForm').text()=="Editar"){
+      $('#BtnForm').text('Guardar');
+      console.log(this.Form);
+      this.Form.get('address').enable();
+      this.Form.get('phone').enable();
+    }else{
+      
+      let alert = this.alertCtrl.create({
+          title: 'Actualizar Información',
+          message: '¿Desea guardar los cambios realizados?',
+          buttons: [
+            {
+              text: 'Cancelar',
+              role: 'cancel',
+              handler: () => {
+                this.Form.disable();
+                $('#BtnForm').text('Editar');
+              }
+            },
+            {
+              text: 'Guardar',
+              handler: () => {
+                this.storage.get('person').then((val)=>{
+                  this.storage.get('DistPosX').then((x)=>{
+                    this.storage.get('DistPosY').then((y)=>{
+                      var updInfo={
+                        address: this.Form.get('address').value,
+                        phone: this.Form.get('phone').value,
+                        personid:val.PERSONID,
+                        coordx: x,
+                        coordy: y
+                      }  
+                      this.socket.emit('UpdateDistributor',updInfo);
+                    })
+                  })
+                  
+                });
+                  this.Form.disable();
+                  $('#BtnForm').text('Editar');
+              }
+            }
+          ]
+        });
+        alert.present();
+        this.socket.on('msg',(data)=>{
+          if(data){
+            let alert = this.alertCtrl.create({
+                  title: 'HECHO!',
+                  subTitle: 'Su Información ha sido actualizada correctamente',
+                  buttons: ['Ok']
+                });
+            alert.present();
+          }else{
+            let alert = this.alertCtrl.create({
+                  title: 'ERROR!',
+                  subTitle: 'Ha ocurrido un error al actualizar su Información. Vuelva a intentarlo',
+                  buttons: ['Ok']
+                });
+            alert.present();
+          }
+        });
+    }
+    
   }
 
   SetPosition(){
     // this.storage.set('MapImage',$('#MapImage'));
     this.nav.push(MapsPageSignUp);
     // env.nav.setRoot(env.maps_page.component);
-  }
-  p(){
-    alert();
-    this.storage.get('DistPosX').then((x)=>{
-      this.storage.get('DistPosY').then((y)=>{
-          $('#MapImage').attr('src',"https://maps.googleapis.com/maps/api/staticmap?center="+x+","+y+"&zoom=15&size=400x300&scale=2&markers=icon:https://s3-us-west-2.amazonaws.com/ionicthemes-apps-assets/ion2FullApp/pin.min.png|"+x+","+y+"");
-      });
-    });
-  }
-  sendMail(email: string){
-    SocialSharing.canShareViaEmail().then(() => {
-      SocialSharing.shareViaEmail("Hello, I'm trying this fantastic app that will save me hours of development.", "This app is the best!", [email]).then(() => {
-        console.log('Success!');
-      }).catch(() => {
-        console.log('Error');
-      });
-    }).catch(() => {
-       console.log('Sharing via email is not possible');
-    });
   }
 
   openInAppBrowser(website: string){
