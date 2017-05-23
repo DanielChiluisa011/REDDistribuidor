@@ -5,6 +5,7 @@ import { ListingPage } from '../listing/listing';
 // import {MapsPage} from '../maps/maps';
 import { NotificationsPage } from '../notifications/notifications';
 import { OrdersPage } from '../Orders/Orders';
+import { SchedulePage } from '../schedule/schedule';
 @Component({
   selector: 'tabs-navigation',
   templateUrl: 'tabs-navigation.html'
@@ -17,6 +18,6 @@ export class TabsNavigationPage {
   constructor() {
     this.tab1Root = OrdersPage;
     this.tab2Root = NotificationsPage;
-    this.tab3Root = ListingPage;
+    this.tab3Root = SchedulePage;
   }
 }
