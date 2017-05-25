@@ -64,23 +64,23 @@ import {PopoverPage} from '../pages/maps/maps';
 import { InsertInformation } from '../pages/InsertInformation/InsertInformation';
 import { Instructions } from '../pages/Instructions/walkthrough';
 
-// const cloudSettings: CloudSettings = {
-//   'core': {
-//     'app_id': 'a47b4141',
-//   },
-//   'push': {
-//     'sender_id': '737509012599',
-//     'pluginConfig': {
-//       'ios': {
-//         'badge': true,
-//         'sound': true
-//       },
-//       'android': {
-//         'iconColor': '#343434'
-//       }
-//     }
-//   }
-// };
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'a47b4141',
+  },
+  'push': {
+    'sender_id': '737509012599',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
 
 @NgModule({
   declarations: [
