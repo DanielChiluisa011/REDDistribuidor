@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.startapplabs.ion2FullApp" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.b2red.distributor" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="Toast">
         <param name="android-package" value="nl.xservices.plugins.Toast" />
@@ -53,6 +53,11 @@
         <param name="onload" value="true" />
     </feature>
     <access origin="https://accounts.google.com/*" />
+    <name>ion2-FullApp PRO</name>
+    <description>An awesome Ionic 2 Starter app.</description>
+    <feature name="PushNotification">
+        <param name="android-package" value="com.adobe.phonegap.push.PushPlugin" />
+    </feature>
     <allow-intent href="market:*" />
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -72,9 +77,9 @@
     <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
     <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
-    <name>ion2-FullApp PRO</name>
-    <description>An awesome Ionic 2 Starter app.</description>
-    <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
+    <name>B2RED Distribuidor</name>
+    <description>Recycling RED App Distributor.</description>
+    <author email="b2redapp@gmail.com" href="https://b2red.com/">B2RED</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

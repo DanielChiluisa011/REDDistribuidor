@@ -52,6 +52,10 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.startapplabs.ion2FullApp"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "737509012599",
+            "PACKAGE_NAME": "com.startapplabs.ion2FullApp"
         }
     },
     "dependent_plugins": {

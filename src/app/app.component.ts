@@ -12,6 +12,11 @@ import { DistributorInformation } from '../pages/Distributor-Information/contact
 import { InsertInformation } from '../pages/InsertInformation/InsertInformation';
 import { Instructions } from '../pages/Instructions/walkthrough';
 
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.html'
@@ -31,7 +36,8 @@ export class MyApp {
   constructor(
     platform: Platform,
     public menu: MenuController,
-    public app: App
+    public app: App,
+    public push: Push
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -51,6 +57,18 @@ export class MyApp {
       { title: 'Settings', icon: 'settings', component: SettingsPage },
       { title: 'Distribuidor', icon: 'settings', component: DistributorInformation }
     ];
+
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+    
+    this.push.rx.notification()
+    .subscribe((msg) => {
+      alert(msg.title + ': ' + msg.text);
+    });
+  
   }
 
   openPage(page) {

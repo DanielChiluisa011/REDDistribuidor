@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.startapplabs.ion2FullApp" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ion2-FullApp PRO</name>
-    <description>An awesome Ionic 2 Starter app.</description>
-    <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
+<widget id="com.b2red.distributor" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>B2RED Distribuidor</name>
+    <description>Recycling RED App Distributor.</description>
+    <author email="b2redapp@gmail.com" href="https://b2red.com/">B2RED</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -101,4 +101,7 @@
     </plugin>
     <engine name="ios" spec="~4.1.1" />
     <engine name="android" spec="~5.1.1" />
+    <plugin name="phonegap-plugin-push" spec="~1.8.4">
+        <variable name="SENDER_ID" value="737509012599" />
+    </plugin>
 </widget>
